@@ -1,5 +1,6 @@
 import argparse
 import textwrap
+from pathlib import Path
 
 from config import setup_logging
 
@@ -34,8 +35,17 @@ def main():
                         const="file",
                         nargs="?")
 
-    args = parser.parse_args()
+    parser.add_argument(
+        "-i",
+        "--input-file",
+        type=Path,
+        default="input/sample_data.csv",
+        const="input/sample_data.csv",
+        nargs="?",
+        help="specify input data csv file (defaults to: %(default)s)",
+    )
 
+    args = parser.parse_args()
 
     data = []
     data_input = args.data_input
@@ -44,13 +54,12 @@ def main():
         data = user_input()
     elif data_input == "csv":
         # TODO: vyměnit za argument od argparse
-        file_path = "input/sample_data.csv"
+        file_path = args.input_file
         data = csv_input(file_path)
     else:
         log.warning(f"neznám možnost vstupu: {data_input}")
         exit()
         # print("neznám")
-
 
     calculated_data = calculate_unit_price(data)
     to_word(calculated_data, 'templates/labels_template.docx')
