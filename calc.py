@@ -1,7 +1,5 @@
 import logging
-from functools import reduce
 from itertools import zip_longest
-from operator import or_
 
 LABELS_PER_PAGE = 32
 
@@ -47,9 +45,11 @@ def enumerate_keys(page_data):
 def merge_page_data(data):
     """Merge list of dictionaries into one."""
     log.debug('merging page data to a single dictionary')
-    data = reduce(or_, data)
+    data_dict = {}
+    for dct in data:
+        data_dict = {**data_dict, **dct}
     log.debug('done')
-    return data
+    return data_dict
 
 
 def round_all_values(dictionary):
