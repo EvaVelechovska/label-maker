@@ -12,6 +12,10 @@ log = logging.getLogger(__name__)
 
 def main():
     log.info(' program start '.center(80, '-'))
+
+    # TODO: vyměnit za argument od argparse
+    file_path = "input/sample_data.csv"
+
     data = csv_input()
     calculated_data = calculate_unit_price(data)
     to_word(calculated_data, 'templates/labels_template.docx')
