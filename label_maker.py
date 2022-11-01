@@ -28,10 +28,17 @@ def main():
             """
         ))
 
+    parser.add_argument("data_input",
+                        choices=["file", "user"],
+                        default="file",
+                        const="file",
+                        nargs="?")
+
     args = parser.parse_args()
 
-    data_input = "user"
+
     data = []
+    data_input = args.data_input
 
     if data_input == "user":
         data = user_input()
