@@ -1,3 +1,4 @@
+# Cli = command line interface
 import sys
 
 from config import setup_logging
@@ -15,9 +16,10 @@ log = logging.getLogger(__name__)
 def main():
     log.info(' program start ')
     print("Start programu")
+
     args = sys.argv[1:]
     if args:
-        cli_main()
+        cli_main(args)
     else:
         gui_main()
 
